@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>San Marcos Adoption Center</title>
+    <script>
+        const URL = 'http://localhost:8000/'
+
+        function setIH(ID, text){
+            document.getElementById(ID).innerHTML = text;
+        }
+
+        async function getPets(){
+            let r = await fetch(URL);
+            let d = await r.json();
+            setIH('pets', d);
+        }
+    </script>
+</head>
+<body>
+    <h1>Available Pets:</h1>
+    <p id = 'pets'></p>
+    <button onClick = "getPets()">Show Pets</button>
+</body>
+</html>
