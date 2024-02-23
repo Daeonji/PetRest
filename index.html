@@ -9,14 +9,23 @@
         }
 
         async function getPets(){
+        try{
             let r = await fetch(URL);
             let d = await r.json();
             setIH('pets', d);
         }
+        catch(error){
+            console.log('Error fetching pets:',error);
+        }
+        }
     </script>
+    <style src = "style.css"></style>
 </head>
 <body>
-    <h1>Available Pets:</h1>
+    <div class = "center">
+        <h1>San Marcos Adoption Center</h1>
+    </div>
+    <h2>Available Pets:</h2>
     <p id = 'pets'></p>
     <button onClick = "getPets()">Show Pets</button>
 </body>
