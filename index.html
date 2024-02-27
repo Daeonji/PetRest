@@ -38,6 +38,9 @@
             const json = await fetch(URL + name, {
                 method: 'DELETE',
             }).then(res => res.text());
+
+            const r = `<p>${name} has been adopted<p/>`;
+            document.getElementById("petDetail").innerHTML = r;
             
         }
     </script>
