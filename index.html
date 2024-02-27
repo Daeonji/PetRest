@@ -8,21 +8,21 @@
         function setIH(ID, text) {
             var str = "";
             text.forEach(e => {
-                str = str + `<button onClick=\"getPet('${e}')\" >${e}</button> <br/>`
+                str = str + `<button onClick=\"getPetInfo('${e}')\" >${e}</button> <br/>  <button onClick =\"adoptPet('${e}')\" >Adopt ${e}</button><br/> <br/> `
             });
             document.getElementById(ID).innerHTML = str;
         }
 
-        async function getPet(name) {
+        async function getPetInfo(name) {
             const json = await fetch(URL + name);
             const data = await json.json();
 
             var str = "";
             str = `Species: ${data.species}<br/>Breed: ${data.breed}<br/>Age: ${data.age}`
-            document.getElementById('petDetail').innerHTML = str;
+            document.getElementById('petDetail').innerHTML = `<p>About ${name}:</p>` + str;
         }
 
-        async function getPets() {
+        async function showPets() {
             try {
                 let r = await fetch(URL);
                 let d = await r.json();
@@ -32,6 +32,13 @@
             catch (error) {
                 console.log('Error fetching pets:', error);
             }
+        }
+
+        async function adoptPet(name){
+            const json = await fetch(URL + name, {
+                method: 'DELETE',
+            }).then(res => res.text());
+            
         }
     </script>
     <style src="style.css"></style>
@@ -43,7 +50,7 @@
     </div>
     <h2>Available Pets:</h2>
     <p id='pets'></p>
-    <button onClick="getPets()">Show Pets</button>
+    <button onClick="showPets()">Show Pets</button>
     <p id='petDetail'></p>
 </body>
 

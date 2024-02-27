@@ -1,10 +1,10 @@
-// **************************************************************  
+// **************************************************************
 // *** This is a simple Pet server written in pure Javascript ***
 // *** (requires Node.js) by The Rickster to serve as a       ***
 // *** working REST API prior to learning Express/MongoDB.    ***
 // ***                                                        ***
 // *** Runs on http://localhost:8000  (see consts below)      ***
-// **************************************************************  
+// **************************************************************
 
 const hostname = "127.0.0.1";
 const port = 8000;
@@ -17,17 +17,17 @@ const { getEnvironmentData } = require("worker_threads");
 // ***********************************************************
 
 var Pets = new Map();
-Pets.set("Barky", {species: "Dog", breed: "Labrador", age: 3 });
-Pets.set("Meowy", {species: "Cat", breed: "Siamese", age: 1 });
-Pets.set("Mew", {species: "Cat", breed: "American Shorthair", age: 3 });
-Pets.set("Mia", {species: "Cat", breed: "Maine Coon", age: 10 });
+Pets.set("Barky", { species: "Dog", breed: "Labrador", age: 3 });
+Pets.set("Meowy", { species: "Cat", breed: "Siamese", age: 1 });
+Pets.set("Mew", { species: "Cat", breed: "American Shorthair", age: 3 });
+Pets.set("Mia", { species: "Cat", breed: "Maine Coon", age: 10 });
 
 //helper functions
 
 function NotExists(name, res) {
   if (Pets.has(name)) return false;
-  res.setHeader('Content-Type', 'application/json');
-  res.statusCode = 404;   //not found
+  res.setHeader("Content-Type", "application/json");
+  res.statusCode = 404; //not found
   res.write(`${name} not found\n`);
   return true;
 }
@@ -38,28 +38,27 @@ function NotExists(name, res) {
 // *****************************************************
 
 function readall(res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.statusCode = 200;   //ok
+  res.setHeader("Content-Type", "application/json");
+  res.statusCode = 200; //ok
   res.write(JSON.stringify([...Pets.keys()]));
 }
 
 function readone(res, name) {
   if (NotExists(name, res)) return;
-  res.setHeader('Content-Type', 'application/json');
-  res.statusCode = 200;   //ok
-  res.write(JSON.stringify( Pets.get(name) ));
+  res.setHeader("Content-Type", "application/json");
+  res.statusCode = 200; //ok
+  res.write(JSON.stringify(Pets.get(name)));
 }
 
 function createone(res, name, item) {
   if (Pets.has(name)) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.statusCode = 400;   //not found
+    res.setHeader("Content-Type", "text/plain");
+    res.statusCode = 400; //not found
     res.write(`${name} already exists`);
-  }
-  else {
+  } else {
     Pets.set(name, item);
-    res.setHeader('Content-Type', 'text/plain');
-    res.statusCode = 200;   //ok
+    res.setHeader("Content-Type", "text/plain");
+    res.statusCode = 200; //ok
     res.write(`${name} created`);
   }
 }
@@ -67,18 +66,17 @@ function createone(res, name, item) {
 function deleteone(res, name) {
   if (NotExists(name, res)) return;
   Pets.delete(name);
-  res.setHeader('Content-Type', 'text/plain');
-  res.statusCode = 200;   //ok
+  res.setHeader("Content-Type", "text/plain");
+  res.statusCode = 200; //ok
   res.write(`${name} deleted`);
 }
 
 function updateone(res, name, item) {
   if (NotExists(name, res)) return;
   original = Pets.get(name);
-  for (var pname in item)
-    original[pname] = item[pname];
-  res.setHeader('Content-Type', 'text/plain');
-  res.statusCode = 200;   //ok
+  for (var pname in item) original[pname] = item[pname];
+  res.setHeader("Content-Type", "text/plain");
+  res.statusCode = 200; //ok
   res.write(`${name} updated`);
 }
 
@@ -87,59 +85,70 @@ function updateone(res, name, item) {
 // *** pass the request on to the right CRUD operation ***
 // *******************************************************
 
-function handle_get(req,res) {
-  if (req.url === "/") { readall(res); return; }
+function handle_get(req, res) {
+  if (req.url === "/") {
+    readall(res);
+    return;
+  }
   readone(res, req.url.substring(1));
 }
 
-function handle_post(req,res,body) {
+function handle_post(req, res, body) {
   createone(res, req.url.substring(1), JSON.parse(body));
 }
 
-function handle_put(req,res,body) {
+function handle_put(req, res, body) {
   updateone(res, req.url.substring(1), JSON.parse(body));
 }
-function handle_patch(req,res,body) {
+function handle_patch(req, res, body) {
   updateone(res, req.url.substring(1), JSON.parse(body));
 }
 
-function handle_delete(req,res) {
+function handle_delete(req, res) {
   deleteone(res, req.url.substring(1));
 }
 
-// ***************************************************** 
+// *****************************************************
 // *** main http request handler.  All requests will ***
 // *** start here, and get sent to a specific        ***
 // *** handler based on the http method              ***
-// ***************************************************** 
+// *****************************************************
 
-function handle_req (req,res,body) {
+function handle_req(req, res, body) {
   try {
     console.log(`handle_req ${req.method} request`);
 
     // Add CORS headers.  I hate CORS
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE');
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,PATCH,DELETE");
 
-    if (req.method === "GET"   ) handle_get(req,res);
-    if (req.method === "POST"  ) handle_post(req,res,body);
-    if (req.method === "PUT"   ) handle_put(req,res,body);
-    if (req.method === "PATCH" ) handle_patch(req,res,body);
-    if (req.method === "DELETE") handle_delete(req,res);
-  }
-  catch (error) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.statusCode = 500;   //server error
+    if (req.method === "GET") handle_get(req, res);
+    if (req.method === "POST") handle_post(req, res, body);
+    if (req.method === "PUT") handle_put(req, res, body);
+    if (req.method === "PATCH") handle_patch(req, res, body);
+    if (req.method === "DELETE") handle_delete(req, res);
+  } catch (error) {
+    res.setHeader("Content-Type", "text/plain");
+    res.statusCode = 500; //server error
     res.write(error);
+  } finally {
+    res.end();
   }
-  finally { res.end(); }
 }
 
-http.createServer( (req, res) => {
-  let body = [];
-  req.on('error',  (err) => { console.error(err); });
-  req.on('data', (chunk) => { body.push(chunk);  });
-  req.on('end',       () => { handle_req(req,res,body); }); 
-} ).listen(port, hostname, () => {
+http
+  .createServer((req, res) => {
+    let body = [];
+    req.on("error", (err) => {
+      console.error(err);
+    });
+    req.on("data", (chunk) => {
+      body.push(chunk);
+    });
+    req.on("end", () => {
+      handle_req(req, res, body);
+    });
+  })
+  .listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
-} );
+  });
