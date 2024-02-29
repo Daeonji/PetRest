@@ -11,6 +11,7 @@
                 str = str + `<button onClick=\"getPetInfo('${e}')\" >${e}</button> <br/>  <button onClick =\"adoptPet('${e}')\" >Adopt ${e}</button><br/> <br/> `
             });
             document.getElementById(ID).innerHTML = str;
+            document.getElementById("petDetail").innerHTML = '';
         }
 
         async function getPetInfo(name) {
