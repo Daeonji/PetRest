@@ -8,9 +8,10 @@
         function setIH(ID, text) {
             var str = "";
             text.forEach(e => {
-                str = str + `<button onClick=\"getPetInfo('${e}')\" >${e}</button> <br/>  <button onClick =\"adoptPet('${e}')\" >Adopt ${e}</button><br/> <br/> `
+                str = str + `<button onClick=\"getPetInfo('${e}')\" >${e}</button> <br/> <p id = '${e}''></p> <button onClick =\"adoptPet('${e}')\" >Adopt ${e}</button><br/> <br/> `
             });
             document.getElementById(ID).innerHTML = str;
+            document.getElementById("petDetail").innerHTML = '';
         }
 
         async function getPetInfo(name) {
@@ -19,7 +20,7 @@
 
             var str = "";
             str = `Species: ${data.species}<br/>Breed: ${data.breed}<br/>Age: ${data.age}`
-            document.getElementById('petDetail').innerHTML = `<p>About ${name}:</p>` + str;
+            document.getElementById(name).innerHTML = `<p>About ${name}:</p>` + str;
         }
 
         async function showPets() {
@@ -44,18 +45,20 @@
             
         }
     </script>
-    <style src="style.css"></style>
+    <link rel = "stylesheet" href = "style.css">
 </head>
 
 <body>
     <div class="center">
         <h1>San Marcos Adoption Center</h1>
-        <hr>
+        
     </div>
-    <h2>Available Pets:</h2>
-    <p id='pets'></p>
-    <p id='petDetail'></p>
-    <button onClick="showPets()">Show Pets</button>
+    <hr>
+        <h2>Available Pets:</h2>
+        <p id='pets'></p>
+        <p id='petDetail'></p>
+        <button onClick="showPets()">Show Pets</button>
+
     
 </body>
 

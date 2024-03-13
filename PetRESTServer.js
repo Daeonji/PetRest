@@ -21,6 +21,9 @@ Pets.set("Barky", { species: "Dog", breed: "Labrador", age: 3 });
 Pets.set("Meowy", { species: "Cat", breed: "Siamese", age: 1 });
 Pets.set("Mew", { species: "Cat", breed: "American Shorthair", age: 3 });
 Pets.set("Mia", { species: "Cat", breed: "Maine Coon", age: 10 });
+Pets.set("Moe", { species: "Cat", breed: "American Shorthair", age: 4 });
+Pets.set("Butters", { species: "Dog", breed: "Golden Retriever", age: 1});
+Pets.set("Pinky", { species: "Dog", breed: "beagle", age: 6 });
 
 //helper functions
 
