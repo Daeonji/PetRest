@@ -3,3 +3,96 @@
   align-items: center;
   justify-content: center;
 }
+
+.vertical-menu {
+  width: 200px;
+  height: 100%;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+#mainWrapper{
+  display: flex;
+  max-width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+#wrapper2{
+  flex:1;
+  padding: 16px;
+}
+#div1{
+  display: inline-block;
+  vertical-align: top;
+}
+#div2{
+  display: inline-block;
+  vertical-align: top;
+}
+.mySlides {
+  display:none;
+}
+#operatingHours {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#operatingHours td, #operatingHours th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#operatingHours tr:nth-child(even){background-color: #f2f2f2;}
+
+#operatingHours tr:hover {background-color: #ddd;}
+
+#operatingHours th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:cadetblue;
+  color: white;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: cadetblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: blue;
+}

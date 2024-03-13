@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>San Marcos Adoption Center</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    const URL = 'http://localhost:8000/'
+
+    async function updatePetInfo(){
+        let petName = document.getElementById("petName").value;
+        let petSpecies = document.getElementById("petSpecies").value;
+        let petBreed = document.getElementById("petBreed").value;
+        let petAge = document.getElementById("petAge").value;
+
+        const response = await fetch(URL + petName, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                species: petSpecies,
+                breed: petBreed,
+                age: petAge
+            })
+        })
+
+        const r = `<p>${petName} has been updated<p/>`;
+        document.getElementById("petNotification").innerHTML = r;
+    }
+</script>
+<body>
+    <h1 class = "center" style = "padding-top: 16px;"><u>San Marcos Adoption Center</u></h1>
+    <h3 class = "center">Located on 750 River Rd, San Marcos, TX 78666</h3>
+    <hr>
+    <div id = "mainWrapper">
+        <div class = "vertical-menu">
+            <a href = "Frontpage.html">Home</a>
+            <a href = "index.html">Available Pets</a>
+            <a href = "update.html">Update Pet Information</a>
+            <a href = "#">Add Pet</a>
+        </div>
+        <div>
+            <form style="padding-left: 10px;" onsubmit="updatePetInfo(); return false;">
+                <label>Enter the name of the pet to be updated: </label>
+                <input type = "text" id = "petName" placeholder="Enter the pet's name"> <br>
+                <label>Species: </label> 
+                <input type = "text" id = "petSpecies" placeholder="Enter the pet's species"> <br>
+                <label>Breed: </label>
+                <input type = "text" id = "petBreed" placeholder="Enter the pet's breed"> <br>
+                <label>Age: </label>
+                <input type = "text" id = "petAge" placeholder="Enter the pet's age"> <br>
+                <input type="submit" value="Submit">
+            </form>
+            <p id = "petNotification"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,10 +4,84 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="center">
-        <h1>San Marcos Adoption Center</h1>
-        
-    </div>
+    <h1 class = "center" style = "padding-top: 16px;"><u>San Marcos Adoption Center</u></h1>
+    <h3 class = "center">Located on 750 River Rd, San Marcos, TX 78666</h3>
     <hr>
+    <div id = "mainWrapper">
+        <div class = "vertical-menu">
+            <a href = "Frontpage.html">Home</a>
+            <a href = "index.html">Available Pets</a>
+            <a href = "update.html">Update Pet Information</a>
+            <a href = "#">Add Pet</a>
+        </div>
+        <div id ="wrapper2">
+            <b><i>San Marcos Animal Services is dedicated to protecting the pets and people of the City of San Marcos. Our mission is to care for, protect and find quality homes for abandoned and neglected animals, aid in the reduction of pet overpopulation, and provide community education for the mutual benefit of animals and people.</i></b>
+            <p>The City of San Marcos Regional Animal Shelter is the stray animal open-intake facility for all of Hays County. This means we accept lost and owner surrendered animals from all cities within Hays County.</p>
+            <p>To adopt, please email <a href="mailto:animaladoptions@sanmarcostx.gov">Animal Adoptions</a> or call 512-805-2657 during the shelter's open hours.</p>
+            <div class="center">
+                <img class = "mySlides" src = "pictures/shelter.jpg" style="height: 450px; width: 650px;">
+                <img class = "mySlides" src="pictures/cat.jpg" style="height: 450px; width: 650px;">
+                <img class = "mySlides" src = "pictures/dog.jpg" style="height: 450px; width: 650px;">
+                <img class = "mySlides" src="pictures/cat2.jpg" style="height: 450px; width: 650px;">
+            </div>
+            <br>
+            <div class = "center" id ="operatingHours">
+                <table>
+                    <tr>
+                        <th>ADOPTION CENTER HOURS</th>
+                        <th>RECEIVING/RECLAIM HOURS</th>
+                    </tr>
+                    <tr>
+                        <td><b>Mon</b> 12:00 pm to 7:00 pm</td>
+                        <td><b>Mon</b> 8:00 am to 6:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Tues</b> 12:00 pm to 7:00 pm</td>
+                        <td><b>Tues</b> 8:00 am to 6:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Wed</b> 12:00 pm to 7:00 pm</td>
+                        <td><b>Wed</b> 8:00 am to 6:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Thur</b> 12:00 pm to 7:00 pm</td>
+                        <td><b>Thur</b> 8:00 am to 6:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Fri</b> 12:00 pm to 7:00 pm</td>
+                        <td><b>Fri</b> 8:00 am to 6:00 pm</td>
+                    </tr>
+                    <tr>
+                        <td><b>Sat</b> 12:00 pm to 5:00 pm</td>
+                        <td><b>Sat</b> <b>CLOSED</b></td>
+                    </tr>
+                    <tr>
+                        <td><b>Sun</b> <b>CLOSED</b></td>
+                        <td><b>Sun</b> <b>CLOSED</b></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+    var myIndex = 0;
+    displaySlides();
+ 
+    function displaySlides() {
+        let x = document.getElementsByClassName("mySlides");
+ 
+        for (var i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+ 
+        myIndex++;
+        if (myIndex >= x.length) {
+            myIndex = 0;
+        }
+   
+        x[myIndex].style.display = "block";
+        setTimeout(displaySlides, 2000);
+ }
+     </script>
 </body>
 </html>
