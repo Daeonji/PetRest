@@ -82,7 +82,7 @@ input[type=text], select {
   box-sizing: border-box;
 }
 
-input[type=submit] {
+.submitBttn{
   width: 100%;
   background-color: cadetblue;
   color: white;
@@ -93,6 +93,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+.submitBttn:hover{
   background-color: blue;
 }

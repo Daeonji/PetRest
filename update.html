@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <script>
-    const URL = 'http://localhost:8000/'
+    const URL = 'http://localhost:8000/';
 
     async function updatePetInfo(){
         let petName = document.getElementById("petName").value;
@@ -15,7 +15,7 @@
         const response = await fetch(URL + petName, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain'
             },
             body: JSON.stringify({
                 species: petSpecies,
@@ -24,8 +24,7 @@
             })
         })
 
-        const r = `<p>${petName} has been updated<p/>`;
-        document.getElementById("petNotification").innerHTML = r;
+        alert(petName + " has been updated!");
     }
 </script>
 <body>
@@ -37,10 +36,10 @@
             <a href = "Frontpage.html">Home</a>
             <a href = "index.html">Available Pets</a>
             <a href = "update.html">Update Pet Information</a>
-            <a href = "#">Add Pet</a>
+            <a href = "addPet.html">Add Pet</a>
         </div>
-        <div>
-            <form style="padding-left: 10px;" onsubmit="updatePetInfo(); return false;">
+        <div id = "petInfo">
+            <form style="padding-left: 10px;">
                 <label>Enter the name of the pet to be updated: </label>
                 <input type = "text" id = "petName" placeholder="Enter the pet's name"> <br>
                 <label>Species: </label> 
@@ -49,9 +48,8 @@
                 <input type = "text" id = "petBreed" placeholder="Enter the pet's breed"> <br>
                 <label>Age: </label>
                 <input type = "text" id = "petAge" placeholder="Enter the pet's age"> <br>
-                <input type="submit" value="Submit">
+                <button onClick = "updatePetInfo()" class = "submitBttn">Submit</button>
             </form>
-            <p id = "petNotification"></p>
         </div>
     </div>
 </body>

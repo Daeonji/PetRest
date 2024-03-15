@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>San Marcos Adoption Center</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const URL = 'http://localhost:8000/';
+
+        async function addPet(){
+            petName = document.getElementById("petName").value;
+            petSpecies = document.getElementById("petSpecies").value;
+            petBreed = document.getElementById("petBreed").value;
+            petAge = document.getElementById("petAge").value;
+
+            const response = await fetch(URL + petName, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'text/plain'
+            },
+            body: JSON.stringify({
+                name: petName,
+                species: petSpecies,
+                breed: petBreed,
+                age: petAge
+            })
+        })
+        }
+    </script>
+</head>
+<body>
+    <h1 class = "center" style = "padding-top: 16px;"><u>San Marcos Adoption Center</u></h1>
+    <h3 class = "center">Located on 750 River Rd, San Marcos, TX 78666</h3>
+    <hr>
+    <div id = "mainWrapper">
+        <div class = "vertical-menu">
+            <a href = "Frontpage.html">Home</a>
+            <a href = "index.html">Available Pets</a>
+            <a href = "update.html">Update Pet Information</a>
+            <a href = "addPet.html">Add Pet</a>
+        </div>
+        <div style="padding-left: 10px;">
+            <h3>At San Marcos Regional Animal Shelter, we firmly believe that pets are happiest in a loving home environment.</h3>
+            <p>We are committed to responsibly adding new pets to our center, ensuring they receive proper care, socialization, and opportunities for adoption. <br> We aim to create successful matches that enrich both the lives of pets and their adoptive families.</p>
+            <p>Fill in the information below to add new animals into our shelter.</p>
+            <form>
+                <label>Enter the animal's Name or Identification Number:</label>
+                <input type = "text" id = "petName" placeholder="Enter the animal's name"> <br/>
+                <label>Enter the animal's Species:</label>
+                <input type = "text" id = "petSpecies" placeholder="Enter the animal's species"> <br>
+                <label>Enter the animal's Breed:</label>
+                <input type = "text" id = "petBreed" placeholder="Enter the animal's breed"> <br>
+                <label>Enter the animal's Age: </label>
+                <input type = "text" id = "petAge" placeholder="Enter the animal's age"> <br>
+                <button class = "submitBttn" onclick="addPet()">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

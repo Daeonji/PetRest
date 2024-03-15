@@ -124,6 +124,7 @@ function handle_req(req, res, body) {
     // Add CORS headers.  I hate CORS
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,PATCH,DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
     if (req.method === "GET") handle_get(req, res);
     if (req.method === "POST") handle_post(req, res, body);
